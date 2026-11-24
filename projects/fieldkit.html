@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fieldkit — Case study · Your Name</title>
+<meta name="description" content="Fieldkit is the design system I led at a growing health-tech company. Six product teams had drifted into six visual languages. I set up the system, its governance and the adoption program." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/site.css" />
+<script src="../js/site.js"></script>
+</head>
+<body style="--p:#d9822b; --p-soft:rgba(217,130,43,.14)">
+<nav class="site-nav"><div class="container">
+  <a class="logo" href="../index.html">Jui Patel</a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work" aria-current="page">Work</a></li>
+    <li class="hide-sm"><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</div></nav>
+
+<header class="case-hero"><div class="container">
+  <a class="back" href="../index.html#work"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 8H3M7 4L3 8l4 4"/></svg> All work</a>
+  <span class="eyebrow">Design system · 2023 – 24</span>
+  <h1>One system for six products and <em>forty</em> designers.</h1>
+  <p class="lede">Fieldkit is the design system I led at a growing health-tech company. Six product teams had drifted into six visual languages. I set up the system, its governance and the adoption program.</p>
+  <div class="meta-grid"><div><h4>Role</h4>Design Systems Lead</div><div><h4>Timeline</h4>6 months · 2023–24</div><div><h4>Team</h4>2 designers, 3 front-end engineers</div><div><h4>Platform</h4>Web, iOS, Android</div><div><h4>Tools</h4>Figma, Storybook, Tokens Studio, Zeroheight</div></div>
+</div></header>
+
+<div class="container cover reveal"><div class="stage wide" role="img" aria-label="Fieldkit screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-ds "><div class="ds-col"><div class="ds-sw"><i></i><i></i><i></i><i></i><i></i></div><div class="ds-type">Aa<small>DISPLAY · 48 / 52</small></div></div><div class="ds-col"><div class="ds-btns"><i></i><i></i><i></i></div><div class="ds-input"></div><div class="ds-input"></div><div class="ds-toggle"><i></i><b></b><b></b></div></div></div></div></div>
+
+<main>
+<section class="section" style="padding-top:0"><div class="container">
+  <div class="tldr reveal">
+    <div><h4>The challenge</h4><p>Six products used 14 shades of blue, 9 button styles and no shared accessibility baseline. Design-to-build handoff was slow and every team rebuilt the same components.</p></div>
+    <div><h4>The solution</h4><p>A token-based design system with accessible components in Figma and code, clear contribution rules and an adoption program that made switching easier than not.</p></div>
+    <div><h4>The impact</h4><p>Teams shipped faster with fewer inconsistencies, and the system became the default way to build in under a year.</p></div>
+  </div>
+  <div class="metrics"><div class="metric reveal"><b>92%</b><span>of product screens built on Fieldkit</span></div><div class="metric reveal"><b>−35%</b><span>design-to-dev handoff time</span></div><div class="metric reveal"><b>120+</b><span>accessible components in Figma &amp; code</span></div></div>
+</div></section>
+
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">01</span><h2>Context</h2></div>
+  <div class="chapter-body reveal"><p>The company had grown from one product to six through acquisitions and fast hiring. Each team had its own Figma library and front-end stack.</p><p>Leadership wanted a cohesive brand. Designers wanted to stop redrawing buttons. Engineers wanted fewer one-off requests. Nobody wanted a mandate.</p></div>
+</div></section>
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">02</span><h2>Research</h2></div>
+  <div class="chapter-body reveal"><p>I combined qualitative and quantitative methods to understand behaviour, not just opinions.</p><div class="methods"><div class="method"><b>1,800</b><h3>Screens audited</h3><p>Inventoried UI across six products to quantify inconsistency.</p></div><div class="method"><b>24</b><h3>Team interviews</h3><p>Designers, engineers and PMs on how they build today.</p></div><div class="method"><b>3</b><h3>Design-system benchmarks</h3><p>Studied mature public systems for structure and governance.</p></div><div class="method"><b>2</b><h3>Pilot teams</h3><p>Partnered with two teams to build and test the first components.</p></div></div><h4 style="margin-top:44px">Key insights</h4><div class="insights"><div class="insight"><span class="n">1</span><h3>Inconsistency was a symptom</h3><blockquote>“We’d use a shared library if it had what we need.”</blockquote><p>Teams diverged because the old library was incomplete, not because they wanted to.</p></div><div class="insight"><span class="n">2</span><h3>Engineers are the real adopters</h3><blockquote>“If it isn’t in code, it doesn’t exist for us.”</blockquote><p>Figma-only components never made it to production.</p></div><div class="insight"><span class="n">3</span><h3>Contribution felt impossible</h3><blockquote>“I don’t know who to ask to add something.”</blockquote><p>With no clear process, teams built one-offs instead of contributing back.</p></div></div></div>
+</div></section>
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">03</span><h2>Who we designed for</h2></div>
+  <div class="chapter-body reveal"><div class="persona">
+      <div class="persona-id"><div class="avatar">PN</div><div><b>Priya Nair</b><br><span>29 · Product Designer, Care app team</span></div><blockquote>“I want to design the experience, not redraw a date picker.”</blockquote></div>
+      <div class="persona-body"><p class="bio">Priya works on a fast-moving product team with a two-week release cycle. She spends hours each sprint recreating components and checking contrast by hand.</p>
+        <div><h4>Goals</h4><ul><li>Spend time on product problems, not primitives</li><li>Ship accessible UI with confidence</li><li>Contribute patterns her team invents</li></ul></div>
+        <div class="frus"><h4>Frustrations</h4><ul><li>Out-of-date, incomplete libraries</li><li>Inconsistent handoff with engineering</li><li>No clear owner to ask for help</li></ul></div>
+      </div></div><h4 style="margin-top:44px">Current-state journey</h4><div class="journey"><div><h4>Start a feature</h4><span class="mood" aria-hidden="true">😐</span><p>Looks for existing components.</p><div class="pain">Library is incomplete or outdated.</div></div><div><h4>Design screens</h4><span class="mood" aria-hidden="true">😕</span><p>Detaches and modifies components.</p><div class="pain">Drift from other teams grows.</div></div><div><h4>Accessibility check</h4><span class="mood" aria-hidden="true">😣</span><p>Checks contrast manually.</p><div class="pain">Time-consuming and error-prone.</div></div><div><h4>Handoff</h4><span class="mood" aria-hidden="true">😟</span><p>Annotates specs for engineers.</p><div class="pain">Engineers rebuild from scratch.</div></div><div><h4>QA</h4><span class="mood" aria-hidden="true">😩</span><p>Reviews the build.</p><div class="pain">Visual bugs and mismatches.</div></div></div></div>
+</div></section>
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">04</span><h2>Defining the problem</h2></div>
+  <div class="chapter-body reveal"><div class="hmw"><h4>How might we</h4><p>How might we make the consistent, accessible choice the easiest choice for every designer and engineer, without slowing teams down?</p></div><h4 style="margin-top:44px">Design principles</h4><div class="principles"><div class="principle"><h3>Tokens before components</h3><p>Decisions live in shared tokens so every platform stays in sync.</p></div><div class="principle"><h3>Code is the source of truth</h3><p>A component isn’t done until it ships in Storybook.</p></div><div class="principle"><h3>Open contribution</h3><p>Anyone can propose; a clear process decides.</p></div></div></div>
+</div></section>
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">05</span><h2>Ideation &amp; iteration</h2></div>
+  <div class="chapter-body reveal"><p>From rough concepts to tested high fidelity, each round was shaped by what we learned from real users.</p><div class="iterations"><figure><div class="stage " role="img" aria-label="Fieldkit screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-ds lofi"><div class="ds-col"><div class="ds-sw"><i></i><i></i><i></i><i></i><i></i></div><div class="ds-type">Aa<small>DISPLAY · 48 / 52</small></div></div><div class="ds-col"><div class="ds-btns"><i></i><i></i><i></i></div><div class="ds-input"></div><div class="ds-input"></div><div class="ds-toggle"><i></i><b></b><b></b></div></div></div></div><figcaption><b>Audit &amp; inventory</b>Mapped every component variant across six products into a single board.</figcaption></figure><figure><div class="stage " role="img" aria-label="Fieldkit screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-ds wire"><div class="ds-col"><div class="ds-sw"><i></i><i></i><i></i><i></i><i></i></div><div class="ds-type">Aa<small>DISPLAY · 48 / 52</small></div></div><div class="ds-col"><div class="ds-btns"><i></i><i></i><i></i></div><div class="ds-input"></div><div class="ds-input"></div><div class="ds-toggle"><i></i><b></b><b></b></div></div></div></div><figcaption><b>Foundations</b>Defined colour, type, spacing and motion tokens with accessibility built in.</figcaption></figure><figure><div class="stage " role="img" aria-label="Fieldkit screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-ds "><div class="ds-col"><div class="ds-sw"><i></i><i></i><i></i><i></i><i></i></div><div class="ds-type">Aa<small>DISPLAY · 48 / 52</small></div></div><div class="ds-col"><div class="ds-btns"><i></i><i></i><i></i></div><div class="ds-input"></div><div class="ds-input"></div><div class="ds-toggle"><i></i><b></b><b></b></div></div></div></div><figcaption><b>Components</b>Built, documented and tested 120+ components with pilot teams.</figcaption></figure></div><div class="changes"><div><span>What we learned in testing</span><span>What we changed</span></div><div><span>Too many variants confused people</span><span>Collapsed to fewer components with clear props</span></div><div><span>Docs went unread</span><span>Embedded usage guidance directly in Figma</span></div><div><span>Contribution felt heavy</span><span>Introduced a lightweight “proposal in 15 minutes” template</span></div></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head reveal"><div><span class="eyebrow">06 · The solution</span><h2>What we <em>shipped</em>.</h2></div><p>A token-based design system with accessible components in Figma and code, clear contribution rules and an adoption program that made switching easier than not.</p></div>
+  <div class="feature reveal"><div class="stage " role="img" aria-label="Fieldkit screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-ds "><div class="ds-col"><div class="ds-sw"><i></i><i></i><i></i><i></i><i></i></div><div class="ds-type">Aa<small>DISPLAY · 48 / 52</small></div></div><div class="ds-col"><div class="ds-btns"><i></i><i></i><i></i></div><div class="ds-input"></div><div class="ds-input"></div><div class="ds-toggle"><i></i><b></b><b></b></div></div></div></div><div><span class="num">01</span><h3>Design tokens</h3><p>A single source of colour, type and spacing decisions, synced from Figma to iOS, Android and web.</p>
+        <ul><li>Light &amp; dark themes</li><li>Brand theming per product</li><li>AA contrast enforced</li></ul></div></div><div class="feature reveal"><div class="stage " role="img" aria-label="Fieldkit screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-ds "><div class="ds-col"><div class="ds-sw"><i></i><i></i><i></i><i></i><i></i></div><div class="ds-type">Aa<small>DISPLAY · 48 / 52</small></div></div><div class="ds-col"><div class="ds-btns"><i></i><i></i><i></i></div><div class="ds-input"></div><div class="ds-input"></div><div class="ds-toggle"><i></i><b></b><b></b></div></div></div></div><div><span class="num">02</span><h3>Accessible components</h3><p>Every component ships with keyboard support, screen-reader labels and documented do’s and don’ts.</p>
+        <ul><li>Figma and React parity</li><li>Storybook with live examples</li><li>Automated a11y checks</li></ul></div></div><div class="feature reveal"><div class="stage " role="img" aria-label="Fieldkit screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-ds "><div class="ds-col"><div class="ds-sw"><i></i><i></i><i></i><i></i><i></i></div><div class="ds-type">Aa<small>DISPLAY · 48 / 52</small></div></div><div class="ds-col"><div class="ds-btns"><i></i><i></i><i></i></div><div class="ds-input"></div><div class="ds-input"></div><div class="ds-toggle"><i></i><b></b><b></b></div></div></div></div><div><span class="num">03</span><h3>Governance &amp; adoption</h3><p>Office hours, a contribution model and a migration tracker made adoption visible and rewarding.</p>
+        <ul><li>Monthly release notes</li><li>Champions in every team</li><li>Adoption dashboard</li></ul></div></div>
+</div></section>
+
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">07</span><h2>Testing &amp; results</h2></div>
+  <div class="chapter-body reveal"><p>We measured adoption by scanning codebases monthly, ran quarterly satisfaction surveys with designers and engineers (NPS rose from 12 to 54) and tracked handoff time on pilot teams.</p><div class="metrics" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))"><div class="metric reveal"><b>92%</b><span>of product screens built on Fieldkit</span></div><div class="metric reveal"><b>−35%</b><span>design-to-dev handoff time</span></div><div class="metric reveal"><b>120+</b><span>accessible components in Figma &amp; code</span></div></div></div>
+</div></section>
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">08</span><h2>Reflection</h2></div>
+  <div class="chapter-body reveal"><p class="big">What I’d carry into the next project:</p><div class="learnings"><div class="learning"><h3>A system is a product</h3><p>Treating designers and engineers as users, with research and roadmaps, drove adoption.</p></div><div class="learning"><h3>Start with pilots, not decrees</h3><p>Two successful teams persuaded the rest better than any memo.</p></div><div class="learning"><h3>Measure what you want to grow</h3><p>The adoption dashboard turned migration into friendly competition.</p></div></div><p>Next: extending tokens to marketing sites and adding data-visualisation components.</p></div>
+</div></section>
+
+<section class="section" style="--p:#ff6b3d; --p-soft:rgba(255,107,61,.14)"><div class="container">
+  <a class="next-project reveal" href="transit-pulse.html">
+    <div class="stage " role="img" aria-label="Transit Pulse screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-phone "><div class="screen"><div class="m-top"><i></i><b></b></div><div class="m-card"><i></i><i></i><i></i></div><div class="m-chips"><i></i><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div></div></div></div>
+    <div><span class="eyebrow">Next project</span><h2>Transit Pulse</h2><p>Transit Pulse is a real-time transit app used by commuters across New York. I led the redesign of its core trip experience after ratings dropped and support tickets about missed trains kept climbing.</p><span class="link-arrow" style="margin-top:20px">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+  </a>
+</div></section>
+</main>
+
+<section class="section contact" id="contact"><div class="container">
+  <span class="eyebrow">Contact</span>
+  <h2>Like what you see? <em>Let’s talk.</em></h2>
+  <div class="contact-row">
+    <div><p>Open to full-time roles and select freelance projects.</p></div>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/jui-patel/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/juiomshanti" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://medium.com/@patel.juipanda100" target="_blank" rel="noopener">Medium</a>
+    </div>
+  </div>
+</div></section>
+<footer class="site-footer"><div class="container">
+  <span>© <span data-year>2026</span> Jui Patel. Designed &amp; built in New York.</span>
+  <a href="../index.html">← Back to home</a>
+</div></footer>
+</body>
+</html>

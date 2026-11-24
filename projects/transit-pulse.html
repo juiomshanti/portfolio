@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Transit Pulse — Case study · Your Name</title>
+<meta name="description" content="Transit Pulse is a real-time transit app used by commuters across New York. I led the redesign of its core trip experience after ratings dropped and support tickets about missed trains kept climbing." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/site.css" />
+<script src="../js/site.js"></script>
+</head>
+<body style="--p:#ff6b3d; --p-soft:rgba(255,107,61,.14)">
+<nav class="site-nav"><div class="container">
+  <a class="logo" href="../index.html">Jui Patel</a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work" aria-current="page">Work</a></li>
+    <li class="hide-sm"><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</div></nav>
+
+<header class="case-hero"><div class="container">
+  <a class="back" href="../index.html#work"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 8H3M7 4L3 8l4 4"/></svg> All work</a>
+  <span class="eyebrow">Mobile app · Redesign · 2025</span>
+  <h1>Making “where’s my train?” a <em>one-glance</em> answer.</h1>
+  <p class="lede">Transit Pulse is a real-time transit app used by commuters across New York. I led the redesign of its core trip experience after ratings dropped and support tickets about missed trains kept climbing.</p>
+  <div class="meta-grid"><div><h4>Role</h4>Lead UX Designer</div><div><h4>Timeline</h4>14 weeks · 2025</div><div><h4>Team</h4>PM, researcher, 3 engineers</div><div><h4>Platform</h4>iOS &amp; Android</div><div><h4>Tools</h4>Figma, ProtoPie, Maze, Dovetail</div></div>
+</div></header>
+
+<div class="container cover reveal"><div class="stage wide" role="img" aria-label="Transit Pulse screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-phone "><div class="screen"><div class="m-top"><i></i><b></b></div><div class="m-card"><i></i><i></i><i></i></div><div class="m-chips"><i></i><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div></div></div></div></div>
+
+<main>
+<section class="section" style="padding-top:0"><div class="container">
+  <div class="tldr reveal">
+    <div><h4>The challenge</h4><p>Riders had to open the app, search a station and scroll through every line just to see their next train, often while walking down subway stairs with one free hand.</p></div>
+    <div><h4>The solution</h4><p>A context-aware home screen that predicts the rider’s likely trip, shows live departures up front and surfaces service changes before they become surprises.</p></div>
+    <div><h4>The impact</h4><p>Trip lookups got faster and calmer: fewer taps, fewer missed trains, and a big jump in app-store rating within two releases.</p></div>
+  </div>
+  <div class="metrics"><div class="metric reveal"><b>−63%</b><span>time to see next departure (14s → 5s)</span></div><div class="metric reveal"><b>+38%</b><span>trip-planning completion rate</span></div><div class="metric reveal"><b>3.9 → 4.7★</b><span>app-store rating after two releases</span></div></div>
+</div></section>
+
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">01</span><h2>Context</h2></div>
+  <div class="chapter-body reveal"><p>Transit Pulse had grown feature by feature for six years. Live arrivals, alerts, maps and fares each lived in separate tabs, and the home screen was a static station search.</p><p>Analytics showed 71% of sessions were the same two or three trips, repeated daily. Yet every session started from zero. The business goal was to win back ratings; the user goal was simply to stop missing trains.</p></div>
+</div></section>
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">02</span><h2>Research</h2></div>
+  <div class="chapter-body reveal"><p>I combined qualitative and quantitative methods to understand behaviour, not just opinions.</p><div class="methods"><div class="method"><b>18</b><h3>Contextual interviews</h3><p>Rode along with commuters during rush hour across four boroughs.</p></div><div class="method"><b>1,240</b><h3>Survey responses</h3><p>In-app survey on trip habits, pain points and alert preferences.</p></div><div class="method"><b>6</b><h3>Competitive audits</h3><p>Reviewed transit and maps apps for patterns in real-time info.</p></div><div class="method"><b>90 days</b><h3>Analytics review</h3><p>Session recordings and funnel data for the trip-lookup flow.</p></div></div><h4 style="margin-top:44px">Key insights</h4><div class="insights"><div class="insight"><span class="n">1</span><h3>Commuters check, not plan</h3><blockquote>“I know the route. I just need to know if I should run.”</blockquote><p>Most sessions lasted under 10 seconds. People wanted a status check, not a planning tool.</p></div><div class="insight"><span class="n">2</span><h3>Alerts arrive too late, or too often</h3><blockquote>“I muted the alerts after the third one about a line I never take.”</blockquote><p>Notifications weren’t tied to a rider’s real routes, so riders tuned them out and missed the ones that mattered.</p></div><div class="insight"><span class="n">3</span><h3>One hand, moving body</h3><blockquote>“I’m usually holding a coffee and going down stairs.”</blockquote><p>Small tap targets near the top of the screen were nearly unusable in transit.</p></div></div></div>
+</div></section>
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">03</span><h2>Who we designed for</h2></div>
+  <div class="chapter-body reveal"><div class="persona">
+      <div class="persona-id"><div class="avatar">JL</div><div><b>Jordan Lee</b><br><span>31 · Nurse, Queens → Manhattan</span></div><blockquote>“Tell me if I need to run. That’s it.”</blockquote></div>
+      <div class="persona-body"><p class="bio">Jordan takes the 7 and the 4 to a 7am hospital shift, five days a week. They check the app three to four times per commute and rarely change routes unless there’s a service disruption.</p>
+        <div><h4>Goals</h4><ul><li>Know the next departure in one glance</li><li>Hear about delays on their route early</li><li>Use the app one-handed while moving</li></ul></div>
+        <div class="frus"><h4>Frustrations</h4><ul><li>Searching the same station every morning</li><li>Irrelevant alerts for lines they never ride</li><li>Finding out about delays on the platform</li></ul></div>
+      </div></div><h4 style="margin-top:44px">Current-state journey</h4><div class="journey"><div><h4>Leave home</h4><span class="mood" aria-hidden="true">😐</span><p>Opens app at the door to check timing.</p><div class="pain">Has to search the station again.</div></div><div><h4>Walk to station</h4><span class="mood" aria-hidden="true">😣</span><p>Re-checks while walking.</p><div class="pain">Tiny targets, can’t use one-handed.</div></div><div><h4>Enter station</h4><span class="mood" aria-hidden="true">😟</span><p>Looks for service changes.</p><div class="pain">Alert buried in a separate tab.</div></div><div><h4>On platform</h4><span class="mood" aria-hidden="true">😤</span><p>Waits, re-checks the countdown.</p><div class="pain">Countdown jumps unpredictably.</div></div><div><h4>Transfer</h4><span class="mood" aria-hidden="true">😩</span><p>Plans the next leg.</p><div class="pain">Starts the whole search again.</div></div></div></div>
+</div></section>
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">04</span><h2>Defining the problem</h2></div>
+  <div class="chapter-body reveal"><div class="hmw"><h4>How might we</h4><p>How might we give commuters the one answer they need, “should I hurry?”, the moment they open the app, without asking them to do anything?</p></div><h4 style="margin-top:44px">Design principles</h4><div class="principles"><div class="principle"><h3>Glance first</h3><p>The most likely answer is visible without a single tap.</p></div><div class="principle"><h3>Earn the interruption</h3><p>Only alert people about trips they actually take.</p></div><div class="principle"><h3>Thumb-friendly</h3><p>Primary actions live in the bottom third of the screen.</p></div></div></div>
+</div></section>
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">05</span><h2>Ideation &amp; iteration</h2></div>
+  <div class="chapter-body reveal"><p>From rough concepts to tested high fidelity, each round was shaped by what we learned from real users.</p><div class="iterations"><figure><div class="stage " role="img" aria-label="Transit Pulse screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-phone lofi"><div class="screen"><div class="m-top"><i></i><b></b></div><div class="m-card"><i></i><i></i><i></i></div><div class="m-chips"><i></i><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div></div></div></div><figcaption><b>Sketches</b>Explored 30+ concepts for a predictive home, from widget-only to full-screen countdowns.</figcaption></figure><figure><div class="stage " role="img" aria-label="Transit Pulse screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-phone wire"><div class="screen"><div class="m-top"><i></i><b></b></div><div class="m-chips"><i></i><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-card"><i></i><i></i><i></i></div><div class="m-row"><i></i><i></i></div></div></div></div><figcaption><b>Wireframes</b>Tested 3 layouts with 8 riders; a stacked “next trip” card won clearly.</figcaption></figure><figure><div class="stage " role="img" aria-label="Transit Pulse screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-phone "><div class="screen"><div class="m-top"><i></i><b></b></div><div class="m-big"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-card"><i></i><i></i><i></i></div></div></div></div><figcaption><b>High fidelity</b>Refined motion, colour for service status and large, bottom-anchored controls.</figcaption></figure></div><div class="changes"><div><span>What we learned in testing</span><span>What we changed</span></div><div><span>Riders didn’t trust predictions they couldn’t edit</span><span>Added a one-tap “not this trip” and visible “why we suggested this”</span></div><div><span>Red for delays read as errors</span><span>Moved to a calmer amber scale with plain-language labels</span></div><div><span>Countdown jitter caused anxiety</span><span>Showed a stable range (“4–6 min”) when data was uncertain</span></div></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head reveal"><div><span class="eyebrow">06 · The solution</span><h2>What we <em>shipped</em>.</h2></div><p>A context-aware home screen that predicts the rider’s likely trip, shows live departures up front and surfaces service changes before they become surprises.</p></div>
+  <div class="feature reveal"><div class="stage " role="img" aria-label="Transit Pulse screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-phone "><div class="screen"><div class="m-top"><i></i><b></b></div><div class="m-chips"><i></i><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-card"><i></i><i></i><i></i></div><div class="m-row"><i></i><i></i></div></div></div></div><div><span class="num">01</span><h3>Predictive home</h3><p>Learns a rider’s routine and opens straight to their likely trip, with live departures for both directions.</p>
+        <ul><li>Time- and location-aware suggestions</li><li>Edit or dismiss in one tap</li><li>Works offline with last-known schedule</li></ul></div></div><div class="feature reveal"><div class="stage " role="img" aria-label="Transit Pulse screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-phone "><div class="screen"><div class="m-top"><i></i><b></b></div><div class="m-big"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-card"><i></i><i></i><i></i></div></div></div></div><div><span class="num">02</span><h3>Route-aware alerts</h3><p>Notifications are tied to saved trips and timed to when they’re useful, before leaving home, not on the platform.</p>
+        <ul><li>Smart quiet hours</li><li>Plain-language disruption summaries</li><li>Suggested alternatives inline</li></ul></div></div><div class="feature reveal"><div class="stage " role="img" aria-label="Transit Pulse screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-phone "><div class="screen"><div class="m-top"><i></i><b></b></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-card"><i></i><i></i><i></i></div></div></div></div><div><span class="num">03</span><h3>Transfer mode</h3><p>When a rider gets off, the app automatically switches to their next leg so there’s no search on the platform.</p>
+        <ul><li>Auto-detects transfer stations</li><li>Walking time between platforms</li><li>Large, glanceable countdown</li></ul></div></div>
+</div></section>
+
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">07</span><h2>Testing &amp; results</h2></div>
+  <div class="chapter-body reveal"><p>We ran two rounds of moderated testing (12 riders) and a Maze study (210 participants) before a staged rollout to 10% of users. The A/B test ran for four weeks.</p><div class="metrics" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))"><div class="metric reveal"><b>−63%</b><span>time to see next departure (14s → 5s)</span></div><div class="metric reveal"><b>+38%</b><span>trip-planning completion rate</span></div><div class="metric reveal"><b>3.9 → 4.7★</b><span>app-store rating after two releases</span></div></div></div>
+</div></section>
+<section class="section"><div class="container chapter">
+  <div class="chapter-label reveal"><span class="num">08</span><h2>Reflection</h2></div>
+  <div class="chapter-body reveal"><p class="big">What I’d carry into the next project:</p><div class="learnings"><div class="learning"><h3>Predictions need an escape hatch</h3><p>Personalisation only felt helpful once people could see and correct it.</p></div><div class="learning"><h3>Test in the real context</h3><p>Lab tests missed the one-hand problem entirely; ride-alongs caught it on day one.</p></div><div class="learning"><h3>Calm is a feature</h3><p>Reducing visual alarm improved trust as much as faster data did.</p></div></div><p>Next, we’re exploring a lock-screen live activity and accessibility routing for step-free stations.</p></div>
+</div></section>
+
+<section class="section" style="--p:#1f9d8b; --p-soft:rgba(31,157,139,.14)"><div class="container">
+  <a class="next-project reveal" href="careline.html">
+    <div class="stage " role="img" aria-label="CareLine screen placeholder"><!-- Replace this mockup with a real screenshot: <img src="../images/..." alt="..."> --><div class="mock-phone "><div class="screen"><div class="m-top"><i></i><b></b></div><div class="m-card"><i></i><i></i><i></i></div><div class="m-chips"><i></i><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div></div></div></div>
+    <div><span class="eyebrow">Next project</span><h2>CareLine</h2><p>CareLine connects patients with primary-care doctors for video visits. Older adults were its fastest-growing audience and the group most likely to abandon booking. I redesigned the flow end to end.</p><span class="link-arrow" style="margin-top:20px">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+  </a>
+</div></section>
+</main>
+
+<section class="section contact" id="contact"><div class="container">
+  <span class="eyebrow">Contact</span>
+  <h2>Like what you see? <em>Let’s talk.</em></h2>
+  <div class="contact-row">
+    <div><p>Open to full-time roles and select freelance projects.</p></div>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/jui-patel/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/juiomshanti" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://medium.com/@patel.juipanda100" target="_blank" rel="noopener">Medium</a>
+    </div>
+  </div>
+</div></section>
+<footer class="site-footer"><div class="container">
+  <span>© <span data-year>2026</span> Jui Patel. Designed &amp; built in New York.</span>
+  <a href="../index.html">← Back to home</a>
+</div></footer>
+</body>
+</html>

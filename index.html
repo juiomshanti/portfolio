@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Your Name — UX Designer</title>
+<meta name="description" content="UX design portfolio. The sky behind this page follows the live weather in New York." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/site.css" />
+<script src="js/site.js"></script>
+<style>
+  /* Hero-only tokens: scoped to .hero so the rest of the page keeps its own palette */
+  .hero {
+    color: var(--ink);
+    transition: color 1.2s ease;
+    --ink: #0f1b2d;
+    --ink-soft: rgba(15, 27, 45, 0.68);
+    --glass: rgba(255, 255, 255, 0.38);
+    --glass-border: rgba(255, 255, 255, 0.55);
+    --accent: #0f1b2d;
+    --accent-ink: #ffffff;
+    --orb: #ffd27a;
+    --orb-glow: rgba(255, 196, 92, 0.55);
+    --orb-opacity: 1;
+    --cloud: rgba(255, 255, 255, 0.85);
+    --cloud-opacity: 0.35;
+    --fog-opacity: 0;
+    --sky: linear-gradient(180deg, #5aa6f2 0%, #9fd0ff 55%, #ffe6c4 100%);
+  }
+
+  /* ---------- Sky themes (set on <header class="hero" data-sky="...">) ---------- */
+  .hero[data-sky="clear-day"]   { --sky: linear-gradient(180deg, #4f9df0 0%, #9fd0ff 55%, #ffe6c4 100%); --cloud-opacity: 0.15; }
+  .hero[data-sky="partly-day"]  { --sky: linear-gradient(180deg, #6aa9e6 0%, #b3d6f5 60%, #f1e9dc 100%); --cloud-opacity: 0.6; }
+  .hero[data-sky="cloudy-day"]  { --sky: linear-gradient(180deg, #8d9aa8 0%, #b9c3cd 55%, #dfe3e6 100%); --cloud-opacity: 0.9; --orb-opacity: 0; --cloud: rgba(240,243,246,0.9); }
+  .hero[data-sky="fog-day"]     { --sky: linear-gradient(180deg, #b8c0c6 0%, #d4d9dc 50%, #e9ebec 100%); --cloud-opacity: 0.3; --orb-opacity: 0.18; --fog-opacity: 1; }
+  .hero[data-sky="rain-day"]    { --sky: linear-gradient(180deg, #4d5b6b 0%, #6f7e8e 50%, #9aa6b1 100%); --cloud-opacity: 0.85; --orb-opacity: 0; --cloud: rgba(120,132,146,0.85); }
+  .hero[data-sky="snow-day"]    { --sky: linear-gradient(180deg, #a9b8c8 0%, #d3dde6 55%, #f3f6f8 100%); --cloud-opacity: 0.7; --orb-opacity: 0; --cloud: rgba(250,252,255,0.9); }
+  .hero[data-sky="storm-day"]   { --sky: linear-gradient(180deg, #23293a 0%, #3b4357 55%, #5c6578 100%); --cloud-opacity: 0.9; --orb-opacity: 0; --cloud: rgba(60,66,84,0.9); }
+
+  .hero[data-sky$="-night"]     { --orb: #f1f0e6; --orb-glow: rgba(220, 225, 255, 0.35); --cloud: rgba(70, 80, 110, 0.75); }
+  .hero[data-sky="clear-night"] { --sky: linear-gradient(180deg, #070b1f 0%, #141c3d 55%, #2b2f5a 100%); --cloud-opacity: 0.1; }
+  .hero[data-sky="partly-night"]{ --sky: linear-gradient(180deg, #0c1229 0%, #1d2548 60%, #353a63 100%); --cloud-opacity: 0.55; }
+  .hero[data-sky="cloudy-night"]{ --sky: linear-gradient(180deg, #161a26 0%, #262b3a 55%, #3a3f50 100%); --cloud-opacity: 0.9; --orb-opacity: 0; }
+  .hero[data-sky="fog-night"]   { --sky: linear-gradient(180deg, #1d222c 0%, #333a46 55%, #4a515d 100%); --cloud-opacity: 0.3; --orb-opacity: 0.12; --fog-opacity: 0.7; }
+  .hero[data-sky="rain-night"]  { --sky: linear-gradient(180deg, #0f1520 0%, #1f2a38 55%, #334050 100%); --cloud-opacity: 0.8; --orb-opacity: 0; }
+  .hero[data-sky="snow-night"]  { --sky: linear-gradient(180deg, #1a2235 0%, #2f3a52 55%, #4b5670 100%); --cloud-opacity: 0.6; --orb-opacity: 0; }
+  .hero[data-sky="storm-night"] { --sky: linear-gradient(180deg, #06080f 0%, #151a28 55%, #262c3d 100%); --cloud-opacity: 0.9; --orb-opacity: 0; --cloud: rgba(40,44,60,0.9); }
+
+  /* Light ink on dark skies */
+  .hero[data-sky$="-night"], .hero[data-sky="rain-day"], .hero[data-sky="storm-day"] {
+    --ink: #f5f7fb;
+    --ink-soft: rgba(245, 247, 251, 0.72);
+    --glass: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --accent: #f5f7fb;
+    --accent-ink: #0f1b2d;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* Two stacked sky layers so gradients can cross-fade */
+  .sky { position: absolute; inset: 0; z-index: -5; background: var(--sky); }
+  .sky-prev { position: absolute; inset: 0; z-index: -4; transition: opacity 1.4s ease; pointer-events: none; }
+
+  .orb {
+    position: absolute; z-index: -3;
+    top: 14%; right: 12%;
+    width: clamp(90px, 13vw, 170px); aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 38%, #fff 0%, var(--orb) 55%);
+    box-shadow: 0 0 80px 30px var(--orb-glow), 0 0 200px 80px var(--orb-glow);
+    opacity: var(--orb-opacity);
+    transition: opacity 1.4s ease, background 1.4s ease, box-shadow 1.4s ease;
+    animation: float 12s ease-in-out infinite;
+  }
+  .hero[data-sky$="-night"] .orb { box-shadow: 0 0 60px 12px var(--orb-glow); }
+  .hero[data-sky$="-night"] .orb::after {
+    /* crescent */
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle at 72% 30%, rgba(10,14,35,0.92) 0 46%, transparent 47%);
+  }
+  @keyframes float { 50% { transform: translateY(-10px); } }
+
+  .clouds { position: absolute; inset: 0; z-index: -2; opacity: var(--cloud-opacity); transition: opacity 1.4s ease; pointer-events: none; }
+  .cloud {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(closest-side, var(--cloud), transparent);
+    filter: blur(6px);
+    animation: drift linear infinite;
+    transition: background 1.4s ease;
+  }
+  @keyframes drift { from { transform: translateX(-30vw); } to { transform: translateX(130vw); } }
+
+  .fog { position: absolute; inset: 0; z-index: -1; opacity: var(--fog-opacity); transition: opacity 1.4s ease; pointer-events: none; }
+  .fog span {
+    position: absolute; left: -50%; width: 200%; height: 40%;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.55), transparent 65%);
+    animation: fogslide 40s linear infinite alternate;
+  }
+  .fog span:nth-child(1) { top: 10%; }
+  .fog span:nth-child(2) { top: 40%; animation-duration: 55s; animation-direction: alternate-reverse; }
+  .fog span:nth-child(3) { top: 65%; animation-duration: 70s; }
+  @keyframes fogslide { to { transform: translateX(20%); } }
+
+  canvas#fx { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+  .flash { position: absolute; inset: 0; z-index: 0; background: #fff; opacity: 0; pointer-events: none; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px clamp(16px, 5vw, 64px);
+  }
+  .logo { font-family: "Fraunces", serif; font-size: 1.25rem; font-weight: 500; letter-spacing: -0.01em; color: inherit; text-decoration: none; }
+  .links { display: flex; gap: clamp(16px, 3vw, 36px); list-style: none; }
+  .links a { color: var(--ink-soft); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color .2s; }
+  .links a:hover { color: var(--ink); }
+
+  /* ---------- Content ---------- */
+  .content {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 clamp(16px, 5vw, 64px) 120px;
+    max-width: 1100px;
+  }
+  .hero .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 28px;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+  h1 {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: clamp(2.6rem, 7.2vw, 6rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    max-width: 14ch;
+  }
+  h1 em { font-style: italic; font-weight: 400; }
+  .lede { margin-top: 28px; font-size: clamp(1.02rem, 1.6vw, 1.2rem); line-height: 1.6; color: var(--ink-soft); max-width: 52ch; }
+  .lede strong { color: var(--ink); font-weight: 500; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 26px; border-radius: 999px;
+    font: 500 0.98rem/1 "Inter", sans-serif; text-decoration: none;
+    transition: transform .2s ease, background .4s ease, color .4s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-ghost { background: var(--glass); color: var(--ink); border: 1px solid var(--glass-border); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .btn svg { width: 16px; height: 16px; }
+
+  /* ---------- Weather chip ---------- */
+  .weather {
+    position: absolute; left: clamp(16px, 5vw, 64px); bottom: 32px;
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 18px 12px 14px; border-radius: 16px;
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    font-size: 0.88rem; line-height: 1.35;
+    transition: background .8s ease, border-color .8s ease;
+  }
+  .weather .icon { font-size: 1.5rem; line-height: 1; }
+  .weather .label { color: var(--ink-soft); font-size: 0.76rem; letter-spacing: 0.04em; }
+  .weather .now { font-weight: 600; }
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #34c77b; margin-right: 6px; vertical-align: 1px; box-shadow: 0 0 0 0 rgba(52,199,123,.6); animation: pulse 2s infinite; }
+  .dot.off { background: #c9a227; animation: none; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 7px rgba(52,199,123,0); } 100% { box-shadow: 0 0 0 0 rgba(52,199,123,0); } }
+
+  /* ---------- Preview switcher (for testing every sky) ---------- */
+  .preview {
+    position: absolute; right: clamp(16px, 5vw, 64px); bottom: 32px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.78rem; color: var(--ink-soft);
+  }
+  .preview select {
+    font: 500 0.8rem "Inter", sans-serif; color: var(--ink);
+    background: var(--glass); border: 1px solid var(--glass-border);
+    border-radius: 10px; padding: 7px 10px; cursor: pointer;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  .preview select option { color: #0f1b2d; }
+
+  @media (max-width: 640px) {
+    .links li:not(:last-child) { display: none; }
+    .content { padding-bottom: 170px; }
+    .preview { left: 16px; right: auto; bottom: 100px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .orb, .cloud, .fog span, .dot { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <header class="hero" data-sky="partly-day">
+    <div class="sky"></div>
+    <div class="sky-prev"></div>
+    <div class="orb" aria-hidden="true"></div>
+    <div class="clouds" aria-hidden="true"></div>
+    <div class="fog" aria-hidden="true"><span></span><span></span><span></span></div>
+    <canvas id="fx" aria-hidden="true"></canvas>
+    <div class="flash" aria-hidden="true"></div>
+
+    <nav>
+      <a href="#" class="logo">Jui Patel</a>
+      <ul class="links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+      <p class="eyebrow">UX &amp; Product Designer · Canada</p>
+      <h1>Designing for the <em>conditions</em> people are really in.</h1>
+      <p class="lede">
+        I design products that adapt to context, not just screens. Like this page — its sky follows
+        <strong>the live weather in New York</strong>, right now.
+      </p>
+    </div>
+
+    <div class="weather" role="status" aria-live="polite">
+      <span class="icon" id="w-icon">⛅</span>
+      <div>
+        <div class="label"><span class="dot" id="w-dot"></span>NEW YORK · <span id="w-time">--:--</span></div>
+        <div class="now" id="w-text">Checking the sky…</div>
+      </div>
+    </div>
+
+    <label class="preview">
+      Sky
+      <select id="preview">
+        <option value="live">Live</option>
+        <option value="clear">Clear</option>
+        <option value="partly">Partly cloudy</option>
+        <option value="cloudy">Overcast</option>
+        <option value="fog">Fog</option>
+        <option value="rain">Rain</option>
+        <option value="snow">Snow</option>
+        <option value="storm">Thunderstorm</option>
+      </select>
+    </label>
+  </header>
+
+  <main>
+    <!-- ================= SELECTED WORK ================= -->
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Selected work · 2019 – 2025</span>
+          </div>
+        </div>
+
+        <div class="work-grid">
+          <a class="project-card reveal" href="projects/transit-pulse.html" style="--p:#ff6b3d; --p-soft:rgba(255,107,61,.14)">
+            <div class="stage">
+              <div class="mock-phone"><div class="screen">
+                <div class="m-top"><i></i><b></b></div>
+                <div class="m-card"><i></i><i></i><i></i></div>
+                <div class="m-chips"><i></i><i></i><i></i></div>
+                <div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div>
+              </div></div>
+            </div>
+            <div class="meta-line"><span>Mobile app · Redesign</span><span>2025</span></div>
+            <h3>Transit Pulse</h3>
+            <p>Rethinking real-time transit info for New York commuters, so “where’s my train?” takes one glance, not five taps.</p>
+            <span class="link-arrow">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+
+          <a class="project-card reveal" href="projects/careline.html" style="--p:#1f9d8b; --p-soft:rgba(31,157,139,.14)">
+            <div class="stage">
+              <div class="mock-phone"><div class="screen">
+                <div class="m-top"><i></i><b></b></div>
+                <div class="m-big"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="m-row"><i></i><i></i></div><div class="m-row"><i></i><i></i></div>
+                <div class="m-card"><i></i><i></i><i></i></div>
+              </div></div>
+            </div>
+            <div class="meta-line"><span>Responsive web · Accessibility</span><span>2025</span></div>
+            <h3>CareLine</h3>
+            <p>Making telehealth booking work for patients over 65, and cutting an 11-minute flow down to four.</p>
+            <span class="link-arrow">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+
+          <a class="project-card reveal" href="projects/ledger.html" style="--p:#5b5bf0; --p-soft:rgba(91,91,240,.14)">
+            <div class="stage">
+              <div class="mock-browser"><div class="chrome"><i></i><i></i><i></i></div><div class="m-dash">
+                <div class="m-side"><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="m-main">
+                  <div class="m-kpis"><div><i></i><b></b></div><div><i></i><b></b></div><div><i></i><b></b></div></div>
+                  <div class="m-chart"><i style="height:40%"></i><i style="height:62%"></i><i style="height:48%"></i><i style="height:75%"></i><i style="height:58%"></i><i style="height:88%"></i><i style="height:66%"></i><i style="height:80%"></i></div>
+                </div>
+              </div></div>
+            </div>
+            <div class="meta-line"><span>B2B SaaS · Dashboard</span><span>2024</span></div>
+            <h3>Ledger</h3>
+            <p>A cash-flow dashboard that small business owners actually open, and act on, every week.</p>
+            <span class="link-arrow">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+
+          <a class="project-card reveal" href="projects/fieldkit.html" style="--p:#d9822b; --p-soft:rgba(217,130,43,.14)">
+            <div class="stage">
+              <div class="mock-ds">
+                <div class="ds-col"><div class="ds-sw"><i></i><i></i><i></i><i></i><i></i></div><div class="ds-type">Aa<small>DISPLAY · 48 / 52</small></div></div>
+                <div class="ds-col"><div class="ds-btns"><i></i><i></i><i></i></div><div class="ds-input"></div><div class="ds-toggle"><i></i><b></b><b></b></div></div>
+              </div>
+            </div>
+            <div class="meta-line"><span>Design system</span><span>2023 – 24</span></div>
+            <h3>Fieldkit</h3>
+            <p>One design system for six products and 40 designers, built so adoption came from relief, not a mandate.</p>
+            <span class="link-arrow">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="portrait reveal">
+          <img src="images/jui-patel.jpg" alt="Jui Patel smiling, standing in a hotel lobby wearing a conference badge" width="768" height="960" />
+        </div>
+        <div class="about-copy reveal">
+          <span class="eyebrow">About</span>
+          <h2>Senior Product Designer with end-to-end ownership across 0→1 AI and digital products.</h2>
+          <p>I turn ambiguous customer and business problems into clear product strategy, trusted workflows, scalable systems, and shipped experiences. I am currently on a mission with The CoBuilders to help small blue-collar business owners reach their first 1 million.</p>
+          <p>I have 5+ years of experience working across product discovery, strategy, research, UX, UI, prototyping, and delivery—partnering closely with founders and engineers to define the right problem, make fast trade-offs, and ship high-quality experiences. Having a developer background, I know how to use code and AI-assisted prototyping tools to move quickly, test ideas, and collaborate more effectively with engineering.</p>
+          <p>I’m particularly interested in working with teams building ambitious AI-native products and services where thoughtful product design can make complexity feel clear, capable, and human. I’m most at home in fast-moving environments—highly collaborative teams, incomplete information, high ownership, and decisions that need to be made quickly.</p>
+
+          <div class="facts">
+            <div><b>5+</b><span>years designing products</span></div>
+            <div><b>10+</b><span>products/features shipped</span></div>
+            <div><b>100K+</b><span>satisfied customers</span></div>
+          </div>
+
+          <h4>Experience</h4>
+          <ul class="xp">
+            <li><b>Founding Product Designer</b><time>2025</time><span>The CoBuilders · SCRUBgpt launch &amp; The CoBuilders booking experience</span></li>
+            <li><b>UX Designer</b><time>2024</time><span>Capgemini · Altria internal company AI experience</span></li>
+            <li><b>Founding UX Designer</b><time>2023</time><span>Validin · Axon launch</span></li>
+            <li><b>Design Intern</b><time>2022</time><span>3D Systems · Cloud migration experience</span></li>
+            <li><b>Software Developer</b><time>2019</time><span>BlackRock · Payments &amp; settlement experience</span></li>
+          </ul>
+
+          <div class="skills">
+            <div>
+              <h4>What I do</h4>
+              <div class="tags"><span class="tag">User Research</span><span class="tag">Prototyping</span><span class="tag">Design Systems</span><span class="tag">Workshop Facilitation</span><span class="tag">End-to-End Product Design</span><span class="tag">AI-Native Experience</span><span class="tag">B2B/B2C</span><span class="tag">User Flows</span><span class="tag">Mobile &amp; Web</span><span class="tag">Responsive Design</span><span class="tag">Design Thinking</span></div>
+            </div>
+            <div>
+              <h4>Tools</h4>
+              <div class="tags"><span class="tag">Figma</span><span class="tag">HTML/CSS</span><span class="tag">Claude</span><span class="tag">Google Stitch</span><span class="tag">Adobe CC</span><span class="tag">Figma Make</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section class="section" id="kind-words">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Kind words</span>
+            <h2>From people I’ve <em>built</em> with.</h2>
+          </div>
+        </div>
+        <div class="quotes">
+          <figure class="quote reveal">
+            <blockquote><p>“I hired Jui as a UI/UX designer and developer at Validin, where she works closely with the other developers and me as the sole contributor to UI/UX design. Jui is exceptionally hard-working and dedicated and was an excellent fit for us as an early-stage startup because she works quickly and is comfortable with ambiguity. During her time, she designed dozens of workflows and screens, participated in design discussions in which she translated high-level requirements into concrete design concepts, and interviewed early adopters to improve product clarity.</p><p>Jui was an ideal fit for our team because she speaks up when she has ideas, questions, or feedback, but she’s simultaneously a great listener. This combination worked great for us because we had a lot to figure out in a very short time, including a pivot, since significant changes are sometimes challenging to communicate and work through.</p><p>I recommend Jui without reservation.”</p></blockquote>
+            <figcaption><i>KK</i><div>Kenneth Kinion<span>Founder, Validin</span></div></figcaption>
+          </figure>
+          <figure class="quote reveal">
+            <blockquote><p>“I had the pleasure of supervising Jui Patel as a UX Designer. Her dedication and commitment to tasks were exemplary. Jui’s skills in interaction design and UX research, along with her strong understanding of the design process, consistently delivered high-quality work. She significantly contributed to the rebranding of Joulea, implementing it seamlessly across presentations, reports, and our website. Jui’s ability to collaborate effectively with the team, even in a short period, was impressive. I am confident in her abilities and highly recommend her for future opportunities in UX design and research.”</p></blockquote>
+            <figcaption><i>KA</i><div>Kiarash Ahmadi<span>CTO, Joulea</span></div></figcaption>
+          </figure>
+          <figure class="quote reveal">
+            <blockquote><p>“Jui is a kind, proactive, brave, and incredibly talented designer. Her talents have improved all the projects we worked on, and she is the kind of person who asks all the right questions to transform ideas into visually stunning, user-centric designs. I can always count on Jui to deliver high-quality work on time. Her reliability and professionalism are second to none. She consistently exceeds expectations, and any team would be blessed to have her as a part of it.”</p></blockquote>
+            <figcaption><i>LH</i><div>Luise Hotzel<span>Content Designer &amp; Strategist, Capgemini</span></div></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <span class="eyebrow">Contact</span>
+      <h2>Let’s design something <em>thoughtful</em> together.</h2>
+      <div class="contact-row">
+        <div>
+          <p>Open to full-time roles and select freelance projects.</p>
+        </div>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/jui-patel/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/juiomshanti" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@patel.juipanda100" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span data-year>2026</span> Jui Patel. Designed &amp; built in New York.</span>
+      <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top ↑</a>
+    </div>
+  </footer>
+
+<script>
+(() => {
+  const NYC = { lat: 40.7128, lon: -74.006 };
+  const API = `https://api.open-meteo.com/v1/forecast?latitude=${NYC.lat}&longitude=${NYC.lon}&current=temperature_2m,weather_code,is_day&temperature_unit=fahrenheit&timezone=America%2FNew_York`;
+  const REFRESH_MS = 10 * 60 * 1000;
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const body = document.querySelector(".hero"); // the sky theme lives on the hero
+  const $ = (id) => document.getElementById(id);
+
+  // ---------- WMO weather code → condition ----------
+  function classify(code) {
+    if (code === 0) return { kind: "clear", text: "Clear sky", intensity: 0 };
+    if (code === 1) return { kind: "partly", text: "Mostly clear", intensity: 0 };
+    if (code === 2) return { kind: "partly", text: "Partly cloudy", intensity: 0 };
+    if (code === 3) return { kind: "cloudy", text: "Overcast", intensity: 0 };
+    if (code === 45 || code === 48) return { kind: "fog", text: "Foggy", intensity: 0 };
+    if (code >= 51 && code <= 57) return { kind: "rain", text: "Drizzle", intensity: 0.35 };
+    if (code === 61 || code === 80) return { kind: "rain", text: "Light rain", intensity: 0.5 };
+    if (code === 63 || code === 81 || code === 66) return { kind: "rain", text: "Rain", intensity: 0.8 };
+    if (code === 65 || code === 82 || code === 67) return { kind: "rain", text: "Heavy rain", intensity: 1 };
+    if (code === 71 || code === 85 || code === 77) return { kind: "snow", text: "Light snow", intensity: 0.5 };
+    if (code === 73) return { kind: "snow", text: "Snow", intensity: 0.8 };
+    if (code === 75 || code === 86) return { kind: "snow", text: "Heavy snow", intensity: 1 };
+    if (code >= 95) return { kind: "storm", text: "Thunderstorm", intensity: 1 };
+    return { kind: "partly", text: "Partly cloudy", intensity: 0 };
+  }
+  const ICONS = {
+    "clear-day": "☀️", "clear-night": "🌙", "partly-day": "⛅", "partly-night": "☁️",
+    "cloudy-day": "☁️", "cloudy-night": "☁️", "fog-day": "🌫️", "fog-night": "🌫️",
+    "rain-day": "🌧️", "rain-night": "🌧️", "snow-day": "❄️", "snow-night": "❄️",
+    "storm-day": "⛈️", "storm-night": "⛈️",
+  };
+  const PREVIEW_DEFAULTS = {
+    clear: { text: "Clear sky", intensity: 0 }, partly: { text: "Partly cloudy", intensity: 0 },
+    cloudy: { text: "Overcast", intensity: 0 }, fog: { text: "Foggy", intensity: 0 },
+    rain: { text: "Rain", intensity: 0.8 }, snow: { text: "Snow", intensity: 0.8 },
+    storm: { text: "Thunderstorm", intensity: 1 },
+  };
+
+  // ---------- Clouds ----------
+  const cloudLayer = document.querySelector(".clouds");
+  for (let i = 0; i < 9; i++) {
+    const c = document.createElement("div");
+    c.className = "cloud";
+    const w = 260 + Math.random() * 420;
+    c.style.width = w + "px";
+    c.style.height = w * (0.35 + Math.random() * 0.2) + "px";
+    c.style.top = Math.random() * 55 + "%";
+    c.style.left = "0";
+    const dur = 90 + Math.random() * 120;
+    c.style.animationDuration = dur + "s";
+    c.style.animationDelay = -Math.random() * dur + "s";
+    cloudLayer.appendChild(c);
+  }
+
+  // ---------- Canvas particles: rain / snow / stars ----------
+  const canvas = $("fx");
+  const ctx = canvas.getContext("2d");
+  let W = 0, H = 0, dpr = 1, particles = [], mode = "none", lightning = false;
+  const flash = document.querySelector(".flash");
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    seed();
+  }
+
+  function seed() {
+    particles = [];
+    const area = (W * H) / (1440 * 900);
+    if (mode === "rain") {
+      const n = Math.round((120 + 380 * intensity) * area);
+      for (let i = 0; i < n; i++) particles.push(rainDrop(true));
+    } else if (mode === "snow") {
+      const n = Math.round((80 + 220 * intensity) * area);
+      for (let i = 0; i < n; i++) particles.push(snowFlake(true));
+    } else if (mode === "stars") {
+      const n = Math.round(220 * area);
+      for (let i = 0; i < n; i++) particles.push({
+        x: Math.random() * W, y: Math.random() * H * 0.75,
+        r: Math.random() * 1.3 + 0.2, p: Math.random() * Math.PI * 2, s: 0.5 + Math.random() * 1.5,
+      });
+    }
+  }
+  let intensity = 0.8;
+  const rainDrop = (anywhere) => ({
+    x: Math.random() * (W + 200) - 100, y: anywhere ? Math.random() * H : -20,
+    l: 10 + Math.random() * 18, v: 9 + Math.random() * 8, a: 0.15 + Math.random() * 0.35,
+  });
+  const snowFlake = (anywhere) => ({
+    x: Math.random() * W, y: anywhere ? Math.random() * H : -10,
+    r: 1 + Math.random() * 3, v: 0.4 + Math.random() * 1.1, sway: Math.random() * Math.PI * 2, a: 0.5 + Math.random() * 0.5,
+  });
+
+  let last = performance.now();
+  function frame(now) {
+    const dt = Math.min((now - last) / 16.67, 3); last = now;
+    ctx.clearRect(0, 0, W, H);
+    if (mode === "rain") {
+      ctx.lineCap = "round"; ctx.lineWidth = 1;
+      const wind = 2.2;
+      for (const d of particles) {
+        if (!reduceMotion) { d.y += d.v * dt; d.x += wind * dt * 0.4; }
+        if (d.y > H) Object.assign(d, rainDrop(false));
+        ctx.strokeStyle = `rgba(220,232,245,${d.a})`;
+        ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d.x + wind * 1.2, d.y + d.l); ctx.stroke();
+      }
+    } else if (mode === "snow") {
+      for (const f of particles) {
+        if (!reduceMotion) { f.y += f.v * dt; f.sway += 0.01 * dt; f.x += Math.sin(f.sway) * 0.5 * dt; }
+        if (f.y > H + 5) Object.assign(f, snowFlake(false));
+        ctx.fillStyle = `rgba(255,255,255,${f.a})`;
+        ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2); ctx.fill();
+      }
+    } else if (mode === "stars") {
+      const t = now / 1000;
+      for (const s of particles) {
+        const tw = reduceMotion ? 0.8 : 0.55 + 0.45 * Math.sin(t * s.s + s.p);
+        ctx.fillStyle = `rgba(255,255,255,${tw})`;
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // Lightning for storms
+  function scheduleLightning() {
+    if (!lightning || reduceMotion) return;
+    setTimeout(() => {
+      if (!lightning) return;
+      flash.animate(
+        [{ opacity: 0 }, { opacity: 0.55 }, { opacity: 0.1 }, { opacity: 0.4 }, { opacity: 0 }],
+        { duration: 650, easing: "ease-out" }
+      );
+      scheduleLightning();
+    }, 3000 + Math.random() * 7000);
+  }
+
+  // ---------- Apply a sky ----------
+  function applySky(kind, isDay, newIntensity) {
+    const key = `${kind}-${isDay ? "day" : "night"}`;
+    if (body.dataset.sky === key && newIntensity === intensity) return key;
+
+    // Cross-fade: snapshot old gradient on the top layer, then fade it out.
+    const prev = document.querySelector(".sky-prev");
+    prev.style.transition = "none";
+    prev.style.background = getComputedStyle(body).getPropertyValue("--sky");
+    prev.style.opacity = "1";
+    if (!applySky.ran) { applySky.ran = true; prev.style.opacity = "0"; } // no fade on first paint
+    body.dataset.sky = key;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      prev.style.transition = "opacity 1.4s ease";
+      prev.style.opacity = "0";
+    }));
+
+    intensity = newIntensity || 0.8;
+    mode = kind === "rain" || kind === "storm" ? "rain"
+         : kind === "snow" ? "snow"
+         : (!isDay && (kind === "clear" || kind === "partly")) ? "stars"
+         : "none";
+    const wasStorm = lightning;
+    lightning = kind === "storm";
+    if (lightning && !wasStorm) scheduleLightning();
+    seed();
+    return key;
+  }
+
+  // ---------- Clock ----------
+  const fmtTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", timeZone: "America/New_York" });
+  const tick = () => { $("w-time").textContent = fmtTime.format(new Date()); };
+  tick(); setInterval(tick, 15000);
+
+  // ---------- Live weather ----------
+  let live = null;
+  async function fetchWeather() {
+    try {
+      const res = await fetch(API, { cache: "no-store" });
+      if (!res.ok) throw new Error(res.status);
+      const { current } = await res.json();
+      const c = classify(current.weather_code);
+      live = { ...c, isDay: current.is_day === 1, temp: Math.round(current.temperature_2m) };
+      $("w-dot").classList.remove("off");
+    } catch (err) {
+      console.warn("Weather unavailable:", err);
+      if (!live) {
+        // Fallback: guess day/night from NYC local hour
+        const h = Number(new Intl.DateTimeFormat("en-US", { hour: "numeric", hour12: false, timeZone: "America/New_York" }).format(new Date()));
+        live = { kind: "partly", text: "Weather unavailable", intensity: 0, isDay: h >= 6 && h < 18, temp: null, offline: true };
+      }
+      $("w-dot").classList.add("off");
+    }
+    if ($("preview").value === "live") render();
+  }
+
+  function render() {
+    const choice = $("preview").value;
+    let kind, isDay, text, temp, inten;
+    if (choice === "live" && live) {
+      ({ kind, isDay, text, temp } = live); inten = live.intensity;
+    } else {
+      const d = PREVIEW_DEFAULTS[choice] || PREVIEW_DEFAULTS.partly;
+      kind = choice; isDay = live ? live.isDay : true; text = d.text + " (preview)"; temp = live?.temp ?? null; inten = d.intensity;
+    }
+    const key = applySky(kind, isDay, inten);
+    $("w-icon").textContent = ICONS[key];
+    $("w-text").textContent = temp != null ? `${temp}°F · ${text}` : text;
+  }
+
+  $("preview").addEventListener("change", render);
+  // Shift+click the chip to flip day/night while previewing
+  document.querySelector(".weather").addEventListener("click", (e) => {
+    if (!e.shiftKey || !live) return;
+    live.isDay = !live.isDay; render();
+  });
+
+  window.addEventListener("resize", resize);
+  resize();
+  requestAnimationFrame(frame);
+  fetchWeather();
+  setInterval(fetchWeather, REFRESH_MS);
+})();
+</script>
+</body>
+</html>
